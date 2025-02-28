@@ -1,17 +1,13 @@
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from fake_useragent import UserAgent
 from config import usernames,password,emails
-from bs4 import BeautifulSoup
 from tools.auto import login,post
 import time
 import pandas as pd
+
 ua = UserAgent(os='windows',browsers='chrome')
 userAgent = ua.chrome
 print(userAgent)
-
 options = webdriver.ChromeOptions()
 options.add_experimental_option("detach", True)
 options.add_argument(f'user-agent={userAgent}')
@@ -19,7 +15,6 @@ driver = webdriver.Chrome(options=options)
 driver.get('https://x.com/i/flow/login')
 
 for u,p,m in zip(usernames,password,emails):
-
         driver = login(driver, u, p)
         for data in [pd.read_csv('C:/data/文案.csv'),pd.read_csv(f'C:/data/{u}.csv')]:
             for _, d in data.iterrows():
