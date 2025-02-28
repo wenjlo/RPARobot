@@ -1,6 +1,6 @@
 from selenium import webdriver
 from fake_useragent import UserAgent
-from config import usernames,password,emails
+from config import usernames,password
 from tools.auto import login,post
 import time
 import pandas as pd
@@ -14,7 +14,7 @@ options.add_argument(f'user-agent={userAgent}')
 driver = webdriver.Chrome(options=options)
 driver.get('https://x.com/i/flow/login')
 
-for u,p,m in zip(usernames,password,emails):
+for u,p,m in zip(usernames,password):
         driver = login(driver, u, p)
         for data in [pd.read_csv('C:/data/文案.csv'),pd.read_csv(f'C:/data/{u}.csv')]:
             for _, d in data.iterrows():
