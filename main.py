@@ -16,7 +16,7 @@ driver.get('https://x.com/i/flow/login')
 
 for u,p in zip(usernames,password):
         driver = login(driver, u, p)
-        for data in [pd.read_csv('C:/data/文案.csv'),pd.read_csv(f'C:/data/{u}.csv')]:
+        for data in [pd.read_csv('./data/文案.csv'),pd.read_csv(f'./data/{u}.csv')]:
             for _, d in data.iterrows():
                 text = f"""
 {d['文案']}
