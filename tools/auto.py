@@ -73,13 +73,13 @@ def reply(driver,account):
     soup = BeautifulSoup(html)
 
 
-def re_login(driver):
+def mail_check_login(driver,mail,pwd):
     wait = WebDriverWait(driver, 3)
     email = wait.until(
         EC.presence_of_element_located((By.CLASS_NAME,
                                         'r-30o5oe.r-1dz5y72.r-13qz1uu.r-1niwhzg.r-17gur6a.r-1yadl64.r-deolkf.r-homxoj.r-poiln3.r-7cikom.r-1ny4l3l.r-t60dpp.r-fdjqy7'))
     )
-    email.send_keys("lo812829@gmail.com")
+    email.send_keys(mail)
     click_class = 'css-175oi2r.r-sdzlij.r-1phboty.r-rs99b7.r-lrvibr.r-19yznuf.r-64el8z.r-1fkl15p.r-o7ynqc.r-6416eg.r-icoktb.r-1ny4l3l'
     time.sleep(2)
 
@@ -93,7 +93,7 @@ def re_login(driver):
         EC.presence_of_element_located((By.CSS_SELECTOR, 'input[autocomplete=current-password]'))
     )
     time.sleep(2)
-    password.send_keys("lo753951")
+    password.send_keys(pwd)
 
     # next_button = wait.until(
     #     EC.presence_of_element_located((By.CSS_SELECTOR, '[data-testid*=ocfEnterTextNextButton]'))
@@ -108,3 +108,4 @@ def re_login(driver):
     login_button.click()
 
     time.sleep(3)
+    return driver

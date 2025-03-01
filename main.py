@@ -1,7 +1,7 @@
 from selenium import webdriver
 from fake_useragent import UserAgent
-from config import usernames,password
-from tools.auto import login,post
+from config import usernames,password,emails
+from tools.auto import login,mail_check_login,post
 import time
 import pandas as pd
 
@@ -15,10 +15,13 @@ driver = webdriver.Chrome(options=options)
 driver.get('https://x.com/i/flow/login')
 
 
-for u,p in zip(usernames,password):
-    for data in [pd.read_csv('./data/文案.csv'),pd.read_csv(f'./data/{u}.csv')]:
+for u,p,e in zip(usernames,password,emails):
+    for data in [pd.read_csv('C:/data/文案.csv'),pd.read_csv(f'C:/data/{u}.csv')]:
         if data.shape[0] > 0:
-            driver = login(driver, u, p)
+            try:
+                driver = login(driver, u, p)
+            except:
+                driver = mail_check_login(driver,e,p)
             for _, d in data.iterrows():
                 text = f"""
 {d['文案']}
