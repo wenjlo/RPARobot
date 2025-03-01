@@ -4,5 +4,5 @@ import pandas as pd
 
 df = pd.DataFrame(columns=['檔名','文案','tag'])
 for user in usernames:
-    df.to_csv( f"./data/{user}.csv",index=False)
+    df.to_csv( f"C:/data/{user}.csv",index=False)
 
