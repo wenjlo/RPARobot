@@ -14,14 +14,16 @@ options.add_argument(f'user-agent={userAgent}')
 driver = webdriver.Chrome(options=options)
 driver.get('https://x.com/i/flow/login')
 
+
 for u,p in zip(usernames,password):
-        driver = login(driver, u, p)
-        for data in [pd.read_csv('./data/文案.csv'),pd.read_csv(f'./data/{u}.csv')]:
+    for data in [pd.read_csv('./data/文案.csv'),pd.read_csv(f'./data/{u}.csv')]:
+        if data.shape[0] > 0:
+            driver = login(driver, u, p)
             for _, d in data.iterrows():
                 text = f"""
 {d['文案']}
 {d['tag']}
-            """
+                """
                 post(driver, d['檔名'], text)
                 time.sleep(2)
                 driver.get('https://x.com/home')
